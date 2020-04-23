@@ -24,9 +24,6 @@ import se.chalmers.ait.dat215.lab2.RecipeDatabase;
 
 
 public class RecipeSearchController implements Initializable {
-    RecipeDatabase db = RecipeDatabase.getSharedInstance();
-    RecipeBackendController recipeBackendController;
-
     @FXML private ComboBox<String> comboBoxLand;
     @FXML private FlowPane recipeList;
     @FXML private ComboBox<String> comboBoxIngrediens;
@@ -40,7 +37,6 @@ public class RecipeSearchController implements Initializable {
     @FXML private Label titleDetail;
     @FXML private ImageView detailImage;
     @FXML private AnchorPane recipeDetailPane;
-    @FXML private SplitPane searchPane;
     @FXML private ImageView closeDetail;
     @FXML private ImageView detailIngredient;
     @FXML private ImageView detailDiff;
@@ -51,6 +47,7 @@ public class RecipeSearchController implements Initializable {
     @FXML private TextArea detailInstructions;
     @FXML private ImageView detailFlag;
 
+    private RecipeBackendController recipeBackendController;
     private Map<String,RecipeListItem>recipeListItemMap = new HashMap<String, RecipeListItem>();
     private RecipeListItem recipeListItem;
 
@@ -231,7 +228,7 @@ public class RecipeSearchController implements Initializable {
 
     }
 
-    public void openRecipeView(Recipe recipe){
+    void openRecipeView(Recipe recipe){
         populateRecipeDetailView(recipe);
         recipeDetailPane.toFront();
     }
