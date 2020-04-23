@@ -1,15 +1,10 @@
 package recipesearch;
 
-import javafx.fxml.FXML;
-import javafx.scene.control.ComboBox;
 import se.chalmers.ait.dat215.lab2.*;
 
 import java.util.List;
 
 public class RecipeBackendController {
-
-    @FXML
-    private ComboBox comboBoxLand;
 
     String cuisine = null;
     String mainIngredient = null;
@@ -47,9 +42,5 @@ public class RecipeBackendController {
     }
     public void setMaxTime(int maxTime){
         this.maxTime = maxTime;
-        System.out.println(maxTime);
-        System.out.println(this.maxTime);
     }
-
-
 }

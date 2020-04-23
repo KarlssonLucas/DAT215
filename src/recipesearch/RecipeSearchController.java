@@ -27,64 +27,37 @@ public class RecipeSearchController implements Initializable {
     RecipeDatabase db = RecipeDatabase.getSharedInstance();
     RecipeBackendController recipeBackendController;
 
-    @FXML
-    private ComboBox<String> comboBoxLand;
-    @FXML
-    private FlowPane recipeList;
-    @FXML
-    private ComboBox<String> comboBoxIngrediens;
-    @FXML
-    private RadioButton rButtonAlla;
-    @FXML
-    private RadioButton rbuttonLatt;
-    @FXML
-    private RadioButton rButtonMellan;
-    @FXML
-    private RadioButton rbuttonSvar;
-    @FXML
-    private Spinner spinnerPris;
-    @FXML
-    private Slider sliderTid;
-    @FXML
-    private Label labelTid;
-    @FXML
-    private Label titleDetail;
-    @FXML
-    private ImageView detailImage;
-    @FXML
-    private Button detailStang;
-    @FXML
-    private AnchorPane recipeDetailPane;
-    @FXML
-    private SplitPane searchPane;
-    @FXML
-    private ImageView closeDetail;
-    @FXML
-    private ImageView detailIngredient;
-    @FXML
-    private ImageView detailDiff;
-    @FXML
-    private Label detailTime;
-    @FXML
-    private Label detailPrice;
-    @FXML
-    private TextArea detailDescription;
-    @FXML
-    private TextArea detailIngredientList ;
-    @FXML
-    private TextArea detailInstructions;
-    @FXML
-    private ImageView detailFlag;
+    @FXML private ComboBox<String> comboBoxLand;
+    @FXML private FlowPane recipeList;
+    @FXML private ComboBox<String> comboBoxIngrediens;
+    @FXML private RadioButton rButtonAlla;
+    @FXML private RadioButton rbuttonLatt;
+    @FXML private RadioButton rButtonMellan;
+    @FXML private RadioButton rbuttonSvar;
+    @FXML private Spinner spinnerPris;
+    @FXML private Slider sliderTid;
+    @FXML private Label labelTid;
+    @FXML private Label titleDetail;
+    @FXML private ImageView detailImage;
+    @FXML private AnchorPane recipeDetailPane;
+    @FXML private SplitPane searchPane;
+    @FXML private ImageView closeDetail;
+    @FXML private ImageView detailIngredient;
+    @FXML private ImageView detailDiff;
+    @FXML private Label detailTime;
+    @FXML private Label detailPrice;
+    @FXML private TextArea detailDescription;
+    @FXML private TextArea detailIngredientList ;
+    @FXML private TextArea detailInstructions;
+    @FXML private ImageView detailFlag;
 
     private Map<String,RecipeListItem>recipeListItemMap = new HashMap<String, RecipeListItem>();
-
     private RecipeListItem recipeListItem;
 
     @FXML
     public void mouseTrap(Event event){
         event.consume();
     }
-
 
     @FXML
     public void closeButtonMouseEntered(){
@@ -105,7 +78,6 @@ public class RecipeSearchController implements Initializable {
         closeDetail.setImage(new Image(getClass().getClassLoader().getResourceAsStream(
                 "RecipeSearch/resources/icon_close.png")));
     }
-
 
     private void populateMainIngredientComboBox() {
         Callback<ListView<String>, ListCell<String>> cellFactory = new Callback<ListView<String>, ListCell<String>>() {
@@ -258,42 +230,37 @@ public class RecipeSearchController implements Initializable {
         detailIngredientList.setText(sb.toString().replaceAll("\\\\n", System.getProperty("line.seperator")));
 
     }
-    @FXML
-    public void closeRecipeView(){
-        searchPane.toFront();
-    }
 
     public void openRecipeView(Recipe recipe){
         populateRecipeDetailView(recipe);
         recipeDetailPane.toFront();
     }
 
-
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        recipeBackendController = new RecipeBackendController();
+    private void populateHashmMap(){
         for (Recipe recipe: recipeBackendController.getRecipes()){
             recipeListItem = new RecipeListItem(recipe,this);
             recipeListItemMap.put(recipe.getName(),recipeListItem);
         }
+    }
+
+
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        recipeBackendController = new RecipeBackendController();
+        populateHashmMap();
         updateRecipeList();
+
         comboBoxIngrediens.getItems().addAll("Visa alla", "Kött","Fisk","Kyckling","Vegtarisk");
         comboBoxIngrediens.getSelectionModel().select("Visa alla");
-        comboBoxIngrediens.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                recipeBackendController.setMainIngredient(newValue);
-                updateRecipeList();
-            }
+        comboBoxIngrediens.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            recipeBackendController.setMainIngredient(newValue);
+            updateRecipeList();
         });
         comboBoxLand.getItems().addAll("Land","Sverige","Grekland","Indien","Asien","Afrika","Frankrike");
         comboBoxLand.getSelectionModel().select("Land");
-        comboBoxLand.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                recipeBackendController.setCuisine(newValue);
-                updateRecipeList();
-            }
+        comboBoxLand.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            recipeBackendController.setCuisine(newValue);
+            updateRecipeList();
         });
 
        ToggleGroup difficultyToggleGroup = new ToggleGroup();
@@ -302,56 +269,45 @@ public class RecipeSearchController implements Initializable {
        rButtonMellan.setToggleGroup(difficultyToggleGroup);
        rbuttonSvar.setToggleGroup(difficultyToggleGroup);
        rButtonAlla.setSelected(true);
-       difficultyToggleGroup.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
-           @Override
-           public void changed(ObservableValue<? extends Toggle> observableValue, Toggle toggle, Toggle t1) {
-               if (difficultyToggleGroup.getSelectedToggle() != null) {
-                   RadioButton selected = (RadioButton) difficultyToggleGroup.getSelectedToggle();
-                   recipeBackendController.setDifficulty(selected.getText());
-                   updateRecipeList();
-               }
+       difficultyToggleGroup.selectedToggleProperty().addListener((observableValue, toggle, t1) -> {
+           if (difficultyToggleGroup.getSelectedToggle() != null) {
+               RadioButton selected = (RadioButton) difficultyToggleGroup.getSelectedToggle();
+               recipeBackendController.setDifficulty(selected.getText());
+               updateRecipeList();
            }
        });
 
        SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(0,1000,0,10);
        spinnerPris.setValueFactory(valueFactory);
-       spinnerPris.valueProperty().addListener(new ChangeListener<Integer>() {
-           @Override
-           public void changed(ObservableValue<? extends Integer> observableValue, Integer integer, Integer t1) {
-               recipeBackendController.setMaxPrice(t1);
-               updateRecipeList();
-           }
+       spinnerPris.valueProperty().addListener((ChangeListener<Integer>) (observableValue, integer, t1) -> {
+           recipeBackendController.setMaxPrice(t1);
+           updateRecipeList();
        });
 
-        spinnerPris.focusedProperty().addListener(new ChangeListener<Boolean>() {
-            @Override
-            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-                if(newValue){
-                    //focusgained - do nothing
-                }
-                else{
-                    Integer value = Integer.valueOf(spinnerPris.getEditor().getText());
-                    recipeBackendController.setMaxPrice(value);
-                    updateRecipeList();
-                }
+        spinnerPris.focusedProperty().addListener((observable, oldValue, newValue) -> {
+            if(newValue){
+                //focusgained - do nothing
+            }
+            else{
+                Integer value = Integer.valueOf(spinnerPris.getEditor().getText());
+                recipeBackendController.setMaxPrice(value);
+                updateRecipeList();
             }
         });
-        sliderTid.valueProperty().addListener(new ChangeListener<Number>() {
-            @Override
-            public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1) {
-                System.out.println("111");
-                System.out.println(t1 !=null);
-                System.out.println(!t1.equals(number));
-                System.out.println(!sliderTid.isValueChanging());
-                if (t1 !=null && !t1.equals(number) && !sliderTid.isValueChanging() || t1.intValue() == 150 || t1.intValue() == 0){
-                    int temp = t1.intValue()/10;
-                    temp *=10;
-                    recipeBackendController.setMaxTime(temp);
-                    labelTid.setText(temp +" Minuter");
-                    updateRecipeList();
-                }
+        sliderTid.valueProperty().addListener((observableValue, number, t1) -> {
+            System.out.println("111");
+            System.out.println(t1 !=null);
+            System.out.println(!t1.equals(number));
+            System.out.println(!sliderTid.isValueChanging());
+            if (t1 !=null && !t1.equals(number) && !sliderTid.isValueChanging() || t1.intValue() == 150 || t1.intValue() == 0){
+                int temp = t1.intValue()/10;
+                temp *=10;
+                recipeBackendController.setMaxTime(temp);
+                labelTid.setText(temp +" Minuter");
+                updateRecipeList();
             }
         });
+
         populateMainIngredientComboBox();
         populateMainCountryComboBox();
     }

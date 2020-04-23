@@ -18,24 +18,15 @@ public class RecipeListItem extends AnchorPane {
     private RecipeSearchController parentController;
     private Recipe recipe;
 
-    @FXML
-    private ImageView matBild;
-    @FXML
-    private Label matNamn;
-    @FXML
-    private ImageView landItem;
-    @FXML
-    private ImageView ingrediensItem;
-    @FXML
-    private ImageView difficultyItem;
-    @FXML
-    private Label maxPrisItem;
-    @FXML
-    private Label tidItem;
-    @FXML
-    private TextArea descItem;
-    @FXML
-    private AnchorPane paneItem;
+    @FXML private ImageView matBild;
+    @FXML private Label matNamn;
+    @FXML private ImageView landItem;
+    @FXML private ImageView ingrediensItem;
+    @FXML private ImageView difficultyItem;
+    @FXML private Label maxPrisItem;
+    @FXML private Label tidItem;
+    @FXML private TextArea descItem;
+    @FXML private AnchorPane paneItem;
 
     @FXML
     public void onClick(Event event) {
