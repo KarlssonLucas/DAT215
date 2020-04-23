@@ -1,1 +1,3 @@
-asdasd
+Tydligare seperation på listan med de olika recepten, alltså när du filtrera bör de vara tydligt vilka som uppfyller något av
+kraven samt de som inte uppfyller ett enda.
+
