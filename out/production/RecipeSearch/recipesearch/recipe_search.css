@@ -1,0 +1,60 @@
+@font-face {
+    src: url("resources/fonts/SFArcheryBlack.ttf");
+}
+@font-face {
+    src: url("resources/fonts/AlmondRocks.otf");
+}
+@font-face {
+
+    src: url("resources/fonts/CODEBold.otf");
+}
+
+.text-normal {
+    -fx-font-size: 11px;
+    -fx-font-family: "CODE-Bold";
+}
+
+#logo {
+    -fx-font-family: "Almond Rocks";
+    -fx-font-size: 25px;
+}
+
+#logo-twirl {
+    -fx-font-family: "SF Archery Black";
+    -fx-font-size: 50px;
+    -fx-rotate: -20;
+    -fx-text-fill: #FFAC33;
+}
+
+.recipe_listitem:hover {
+    -fx-background-color: black;
+}
+
+.recipe_listitem:pressed {
+    -fx-background-color: black;
+}
+
+#descItem {
+    -fx-font-size: 11px;
+    -fx-font-family: Arial, Helvetica, sans-serif;
+}
+
+#paneItem {
+    -fx-border-width: 1px;
+    -fx-border-color: #999999;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+}
+
+.text-area .content {
+    -fx-background-color: -fx-background;
+}
+
+.text-area  {
+    -fx-background-color: -fx-background;
+}
+
+#titleDetail {
+    -fx-font-family: "Comic Sans MS";
+    -fx-font-size: 25px;
+}

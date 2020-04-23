@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<fx:root fx:id="paneItem" onMouseClicked="#onClick" prefHeight="100.0" prefWidth="495.0" type="javafx.scene.layout.AnchorPane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label fx:id="matNamn" layoutX="213.0" layoutY="24.0" text="Stekt ägg" />
+      <ImageView fx:id="difficultyItem" fitHeight="32.0" fitWidth="43.0" layoutX="247.0" layoutY="52.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@resources/icon_difficulty_easy.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="ingrediensItem" fitHeight="27.0" fitWidth="51.0" layoutX="212.0" layoutY="46.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@resources/icon_main_chicken.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="tidItem" layoutX="307.0" layoutY="51.0" text="Label" />
+      <Label fx:id="maxPrisItem" layoutX="376.0" layoutY="51.0" text="Label" />
+      <TextArea fx:id="descItem" editable="false" layoutX="213.0" layoutY="80.0" maxHeight="1.7976931348623157E308" prefHeight="58.0" prefWidth="264.0" text="a&#10;a&#10;a&#10;a&#10;" wrapText="true" />
+      <ImageView fx:id="matBild" fitHeight="154.0" fitWidth="139.0" layoutX="9.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@resources/logo.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="landItem" fitHeight="27.0" fitWidth="36.0" layoutX="61.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@resources/icon_flag_sweden.png" />
+         </image>
+      </ImageView>
+   </children>
+</fx:root>
